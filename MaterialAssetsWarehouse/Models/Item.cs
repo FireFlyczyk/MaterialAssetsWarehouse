@@ -4,23 +4,22 @@ namespace MaterialAssetsWarehouse.Models
 {
     public class Item
     {
+        [Required]
         public int ItemID { get; set; }
-
+        [Required]
         public ItemGroup Group { get; set; }
-
+        [Required]
         public UnitOfMeasurement Measurement { get; set; }
-
+        [Required]
         public int Quantity { get; set; }
-
-        public decimal Price { get; set; }
-
+        [Required]
+        public decimal PriceWithoutVAT { get; set; }
+        [Required]
         public string Status { get; set; }
 
         public string StorageLocation { get; set; }
 
         public string ContactPerson { get; set; }
-
-        public string Photo { get; set; }
 
         public enum ItemGroup
         {

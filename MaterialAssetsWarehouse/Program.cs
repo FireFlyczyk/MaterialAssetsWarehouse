@@ -1,7 +1,11 @@
+using MaterialAssetsWarehouse.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<ItemDbContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("ItemDbContextConnection")));
 
 var app = builder.Build();
 
