@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Item>
+
+<h1>List of Items</h1>
+<table>
+    <tr>
+        <th>Item ID</th>
+        <th>Group</th>
+        <th>Measurement</th>
+        <th>Quantity</th>
+        <th>Price Without VAT</th>
+        <th>Status</th>
+        <th>Storage Location</th>
+        <th>Contact Person</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ItemID</td>
+            <td>@item.Group</td>
+            <td>@item.Measurement</td>
+            <td>@item.Quantity</td>
+            <td>@item.PriceWithoutVAT</td>
+            <td>@item.Status</td>
+            <td>@item.StorageLocation</td>
+            <td>@item.ContactPerson</td>
+
+        </tr>
+    }
+</table>
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f7f8f9
+    }
+
+    th {
+        background-color: #f1eeea
+    }
+</style>

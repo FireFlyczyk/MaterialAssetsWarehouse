@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ItemDbContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("ItemDbContextConnection")));
+builder.Services.AddScoped<IItemRepository, ItemRepository>();  
 
 var app = builder.Build();
 
@@ -23,6 +24,11 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "ItemList",
+    pattern: "Lists/Items/",
+    defaults: new { controller = "Item", action = "Items" });
 
 app.MapControllerRoute(
     name: "default",
