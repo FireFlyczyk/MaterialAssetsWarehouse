@@ -3,14 +3,30 @@
 <h1>List of Items</h1>
 <table>
     <tr>
-        <th>Item ID</th>
-        <th>Group</th>
-        <th>Measurement</th>
-        <th>Quantity</th>
-        <th>Price Without VAT</th>
-        <th>Status</th>
-        <th>Storage Location</th>
-        <th>Contact Person</th>
+        <th>
+            @Html.ActionLink("Id", "Items", new { sortOrder = ViewBag.IdSortParm })
+        </th>
+        <th>
+            @Html.ActionLink("Group", "Items", new { sortOrder = ViewBag.GroupSortParm })
+        </th>
+        <th>
+            @Html.ActionLink("Measurement", "Items", new { sortOrder = ViewBag.MeasurementSortParm })
+        </th>
+        <th>
+            @Html.ActionLink("Quantity", "Items", new { sortOrder = ViewBag.QuantitySortParm })
+        </th>
+        <th>
+            @Html.ActionLink("Price Without VAT", "Items", new { sortOrder = ViewBag.PriceWithoutVATSortParm })
+        </th>
+        <th>
+            @Html.ActionLink("Status", "Items", new { sortOrder = ViewBag.StatusSortParm })
+        </th>
+        <th>
+            @Html.ActionLink("Storage Location", "Items", new { sortOrder = ViewBag.StorageLocationSortParm })
+        </th>
+        <th>
+            @Html.ActionLink("Contact Person", "Items", new { sortOrder = ViewBag.ContactPersonSortParm })
+        </th>
     </tr>
     @foreach (var item in Model)
     {
