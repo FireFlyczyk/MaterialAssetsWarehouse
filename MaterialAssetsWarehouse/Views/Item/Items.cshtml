@@ -1,6 +1,15 @@
 ﻿@model IEnumerable<Item>
 
 <h1>List of Items</h1>
+
+@using (Html.BeginForm("Items", "Item", FormMethod.Get))
+{
+    <p>
+        Find by Id: @Html.TextBox("searchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+
 <table>
     <tr>
         <th>
@@ -39,7 +48,6 @@
             <td>@item.Status</td>
             <td>@item.StorageLocation</td>
             <td>@item.ContactPerson</td>
-
         </tr>
     }
 </table>

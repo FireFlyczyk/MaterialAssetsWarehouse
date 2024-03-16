@@ -1,6 +1,7 @@
 ﻿using MaterialAssetsWarehouse.Data;
 using MaterialAssetsWarehouse.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace MaterialAssetsWarehouse.Controllers
 {
@@ -14,19 +15,37 @@ namespace MaterialAssetsWarehouse.Controllers
         }
 
 
-        public IActionResult Items(string sortOrder)
+        public IActionResult Items(string sortOrder, int? searchString)
         {
             ViewBag.IdSortParm = String.IsNullOrEmpty(sortOrder) ? "ItemId_desc" : "";
-            ViewBag.GroupSortParm = String.IsNullOrEmpty(sortOrder) ? "Group_desc" : "";
+            ViewBag.GroupSortParm = sortOrder == "Group" ? "Group_desc" : "Group";
             ViewBag.MeasurementSortParm = sortOrder == "Measurement" ? "Measurement_desc" : "Measurement";
             ViewBag.QuantitySortParm = sortOrder == "Quantity" ? "Quantity_desc" : "Quantity";
             ViewBag.PriceWithoutVATSortParm = sortOrder == "PriceWithoutVAT" ? "PriceWithoutVAT_desc" : "PriceWithoutVAT";
             ViewBag.StatusSortParm = sortOrder == "Status" ? "Status_desc" : "Status";
             ViewBag.StorageLocationSortParm = sortOrder == "StorageLocation" ? "StorageLocation_desc" : "StorageLocation";
             ViewBag.ContactPersonSortParm = sortOrder == "ContactPerson" ? "ContactPerson_desc" : "ContactPerson";
-
+        
             var items = _itemRepository.GetAllItems();
-            items = sortOrder switch
+
+            items = ApplyFilter(items, searchString);   
+            items = ApplySorting(items, sortOrder);
+           
+            return View(items.ToList());
+        }
+
+        private IEnumerable<Item> ApplyFilter(IEnumerable<Item> items, int? searchString )
+        {
+            if (searchString.HasValue)
+            {
+                items = items.Where(i => i.ItemID.ToString().Contains(searchString.Value.ToString()));
+            }
+            return items;
+        }
+
+        private IOrderedEnumerable<Item> ApplySorting(IEnumerable<Item> items, string sortOrder)
+        {
+            return sortOrder switch
             {
                 "ItemId_desc" => items.OrderByDescending(i => i.ItemID),
                 "Group_desc" => items.OrderByDescending(i => i.Group),
@@ -44,9 +63,9 @@ namespace MaterialAssetsWarehouse.Controllers
                 "ContactPerson_desc" => items.OrderByDescending(i => i.ContactPerson),
                 _ => items.OrderBy(i => i.ItemID),
             };
-            return View(items.ToList());
         }
-
     }
+
+ 
         
 }  
