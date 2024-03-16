@@ -27,8 +27,13 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "ItemList",
-    pattern: "Lists/Items/",
+    pattern: "",
     defaults: new { controller = "Item", action = "Items" });
+
+app.MapControllerRoute(
+    name: "Order",
+    pattern: "Order/{action=SubmitOrder}",
+    defaults: new { controller = "Order" });
 
 app.MapControllerRoute(
     name: "default",

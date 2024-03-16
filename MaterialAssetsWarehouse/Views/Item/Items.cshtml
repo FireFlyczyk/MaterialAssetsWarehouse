@@ -8,7 +8,22 @@
         Find by Id: @Html.TextBox("searchString")
         <input type="submit" value="Search" />
     </p>
+    <button type="button" class="button-order" onclick="location.href='@Url.Action("OrderForm", "Order")'">Order</button>
+
 }
+
+@if (TempData["Message"] != null)
+{
+    <div id="successMessage" class="alert alert-success" role="alert">
+        @TempData["Message"]
+    </div>
+}
+<script>
+    setTimeout(function () {
+        document.getElementById('successMessage').style.display = 'none';
+    }, 2200); 
+</script>
+
 
 <table>
     <tr>
@@ -53,6 +68,40 @@
 </table>
 
 <style>
+
+    .button-order {
+        align-items: center;
+        appearance: button;
+        background-color: #0276FF;
+        border-radius: 8px;
+        border-style: none;
+        box-shadow: rgba(255, 255, 255, 0.26) 0 1px 2px inset;
+        box-sizing: border-box;
+        color: #fff;
+        cursor: pointer;
+        display: flex;
+        flex-direction: row;
+        flex-shrink: 0;
+        font-family: "RM Neue",sans-serif;
+        font-size: 100%;
+        line-height: 1.15;
+        margin-bottom: 10px;
+        padding: 10px 21px;
+        text-align: center;
+        text-transform: none;
+        transition: color .13s ease-in-out,background .13s ease-in-out,opacity .13s ease-in-out,box-shadow .13s ease-in-out;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+
+    .button-22:active {
+        background-color: #006AE8;
+    }
+
+    .button-22:hover {
+        background-color: #1C84FF;
+    }
     table {
         width: 100%;
         border-collapse: collapse;
@@ -71,4 +120,6 @@
     th {
         background-color: #f1eeea
     }
+
+    
 </style>
