@@ -11,10 +11,23 @@ namespace MaterialAssetsWarehouse.Data
             _context = context;
         }
 
+        public void Add(Item item)
+        {
+            if (item !=null)
+            {
+                _context.Add(item);
+            }
+        }
+
         public IEnumerable<Item> GetAllItems()
         {
             IEnumerable<Item> items = _context.Items.ToList();
             return items;
+        }
+
+        public bool Savechanges()
+        {
+            return _context.SaveChanges()>0 ;
         }
     }
 }

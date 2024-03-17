@@ -14,7 +14,7 @@ namespace MaterialAssetsWarehouse.Controllers
             _itemRepository = itemRepository;
         }
 
-
+        [HttpGet]
         public IActionResult Items(string sortOrder, int? searchString)
         {
             ViewBag.IdSortParm = String.IsNullOrEmpty(sortOrder) ? "ItemId_desc" : "";
@@ -32,6 +32,26 @@ namespace MaterialAssetsWarehouse.Controllers
             items = ApplySorting(items, sortOrder);
            
             return View(items.ToList());
+        }
+        public IActionResult AddForm()
+        {
+            var model = new Item();
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddItem(Item item)
+        {
+            if (ModelState.IsValid)
+            {
+                _itemRepository.Add(item);
+                _itemRepository.Savechanges();
+                
+                return RedirectToAction("Items", "Item");
+            }
+
+            return View("AddForm", item);
+          
         }
 
         private IEnumerable<Item> ApplyFilter(IEnumerable<Item> items, int? searchString )
