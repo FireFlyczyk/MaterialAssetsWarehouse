@@ -7,6 +7,8 @@ namespace MaterialAssetsWarehouse.Data
         IEnumerable<Item> GetAllItems();
         void Add(Item item);
         bool Savechanges();
+        void Remove(Item item);
+        Item GetItemById(int id);
 
     }
 }

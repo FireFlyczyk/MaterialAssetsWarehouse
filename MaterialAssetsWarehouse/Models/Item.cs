@@ -6,6 +6,8 @@ namespace MaterialAssetsWarehouse.Models
     {
         [Required]
         public int ItemID { get; set; }
+        [Required] 
+        public string Name { get; set; }
         [Required]
         public ItemGroup Group { get; set; }
         [Required]

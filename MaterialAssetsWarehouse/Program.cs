@@ -40,6 +40,12 @@ app.MapControllerRoute(
     pattern: "Item/{action=AddItem}",
     defaults: new { controller = "Item" });
 
+app.MapControllerRoute(
+    name: "ItemDelete",
+    pattern: "Item/Delete/{ItemId}",
+    defaults: new { controller = "Item", action = "DeleteItem" });
+
+
 
 app.MapControllerRoute(
     name: "default",
