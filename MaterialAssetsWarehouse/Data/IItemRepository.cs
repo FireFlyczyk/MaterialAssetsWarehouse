@@ -9,6 +9,6 @@ namespace MaterialAssetsWarehouse.Data
         bool Savechanges();
         void Remove(Item item);
         Item GetItemById(int id);
-
+        void Update(Item item);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MaterialAssetsWarehouse.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace MaterialAssetsWarehouse.Data
 {
@@ -47,6 +48,26 @@ namespace MaterialAssetsWarehouse.Data
         public bool Savechanges()
         {
             return _context.SaveChanges()>0 ;
+        }
+
+        public void Update(Item item)
+        {
+            var existingItem = _context.Items.FirstOrDefault(i => i.ItemID == item.ItemID);
+            if (existingItem != null)
+            {
+               
+                existingItem.Name = item.Name;
+                existingItem.Group = item.Group;
+                existingItem.Measurement = item.Measurement;
+                existingItem.Quantity = item.Quantity;
+                existingItem.PriceWithoutVAT = item.PriceWithoutVAT;
+                existingItem.Status = item.Status;
+                existingItem.StorageLocation = item.StorageLocation;
+                existingItem.ContactPerson = item.ContactPerson;
+
+                
+                _context.Entry(existingItem).State = EntityState.Modified;
+            }
         }
     }
 }

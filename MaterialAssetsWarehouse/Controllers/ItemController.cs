@@ -43,6 +43,7 @@ namespace MaterialAssetsWarehouse.Controllers
         [HttpPost]
         public IActionResult AddItem(Item item)
         {
+          
             if (ModelState.IsValid)
             {
                 _itemRepository.Add(item);
@@ -104,6 +105,30 @@ namespace MaterialAssetsWarehouse.Controllers
                 "ContactPerson_desc" => items.OrderByDescending(i => i.ContactPerson),
                 _ => items.OrderBy(i => i.ItemID),
             };
+        }
+
+        public IActionResult EditItem(int itemId)
+        {
+            var item = _itemRepository.GetItemById(itemId);
+            if (item == null)
+            {
+                return NotFound(); 
+            }
+            return View(item);
+        }
+
+
+        [HttpPost]
+        public IActionResult EditItem(Item item)
+        {
+            if (ModelState.IsValid)
+            {
+                _itemRepository.Update(item);
+                _itemRepository.Savechanges();
+                TempData["Message"] = "Item updated successfully";
+                return RedirectToAction("Items", "Item");
+            }
+            return View(item); 
         }
     }
 

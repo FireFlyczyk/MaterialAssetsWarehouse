@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Item>
+<link rel="stylesheet" href="~/css/styles.css">
 
 <h1>List of Items</h1>
 
@@ -8,8 +9,8 @@
         Find by Id: @Html.TextBox("searchString")
         <input type="submit" value="Search" />
     </p>
-    <button type="button" class="button-order" onclick="location.href='@Url.Action("OrderForm", "Order")'">Create Order</button>
-    <button type="button" class="button-add" onclick="location.href='@Url.Action("AddForm", "Item")'">Add Item</button>
+    <button type="button" class=" button button-order" onclick="location.href='@Url.Action("OrderForm", "Order")'">Create Order</button>
+    <button type="button" class="button button-add" onclick="location.href='@Url.Action("AddForm", "Item")'">Add Item</button>
 
 }
 
@@ -69,10 +70,15 @@
             <td>@item.Status</td>
             <td>@item.StorageLocation</td>
             <td>@item.ContactPerson</td>
-            <td>
+            <td colspan="2">
+               
                 <form asp-controller="Item" asp-action="DeleteItem" method="post">
                     <input type="hidden" name="ItemId" value="@item.ItemID" />
-                    <button type="submit" class="button-delete" onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
+                    <button type="submit" class="button button-delete" onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
+                </form>
+                <form asp-controller="Item" asp-action="EditItem" method="get">
+                    <input type="hidden" name="itemId" value="@item.ItemID" />
+                    <button type="submit" class="button button-edit">Edit</button>
                 </form>
             </td>
 
@@ -80,105 +86,3 @@
     }
 </table>
 
-<style>
-
-    .button-order {
-        align-items: center;
-        appearance: button;
-        background-color: #0276FF;
-        border-radius: 8px;
-        border-style: none;
-        box-shadow: rgba(255, 255, 255, 0.26) 0 1px 2px inset;
-        box-sizing: border-box;
-        color: #fff;
-        cursor: pointer;
-        display: flex;
-        flex-direction: row;
-        flex-shrink: 0;
-        font-family: "RM Neue",sans-serif;
-        font-size: 100%;
-        line-height: 1.15;
-        margin-bottom: 10px;
-        padding: 10px 21px;
-        text-align: center;
-        text-transform: none;
-        transition: color .13s ease-in-out,background .13s ease-in-out,opacity .13s ease-in-out,box-shadow .13s ease-in-out;
-        user-select: none;
-        -webkit-user-select: none;
-        touch-action: manipulation;
-    }
-
-    .button-delete {
-        align-items: center;
-        appearance: button;
-        background-color: #DC143C;
-        border-radius: 8px;
-        border-style: none;
-        box-shadow: rgba(255, 255, 255, 0.26) 0 1px 2px inset;
-        box-sizing: border-box;
-        color: #fff;
-        cursor: pointer;
-        display: flex;
-        flex-direction: row;
-        flex-shrink: 0;
-        font-family: "RM Neue",sans-serif;
-        font-size: 100%;
-        line-height: 1.15;
-        margin-bottom: 10px;
-        padding: 10px 21px;
-        text-align: center;
-        text-transform: none;
-        transition: color .13s ease-in-out,background .13s ease-in-out,opacity .13s ease-in-out,box-shadow .13s ease-in-out;
-        user-select: none;
-        -webkit-user-select: none;
-        touch-action: manipulation;
-    }
-
-    .button-add {
-        align-items: center;
-        appearance: button;
-        background-color: rgb(50,205,50);
-        border-radius: 8px;
-        border-style: none;
-        box-shadow: rgba(255, 255, 255, 0.26) 0 1px 2px inset;
-        box-sizing: border-box;
-        color: #fff;
-        cursor: pointer;
-        display: flex;
-        flex-direction: row;
-        flex-shrink: 0;
-        font-family: "RM Neue",sans-serif;
-        font-size: 100%;
-        line-height: 1.15;
-        margin-bottom: 10px;
-        padding: 10px 21px;
-        text-align: center;
-        text-transform: none;
-        transition: color .13s ease-in-out,background .13s ease-in-out,opacity .13s ease-in-out,box-shadow .13s ease-in-out;
-        user-select: none;
-        -webkit-user-select: none;
-        touch-action: manipulation;
-    }
-
-   
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    th, td {
-        padding: 8px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-    }
-
-    tr:nth-child(even) {
-        background-color: #f7f8f9
-    }
-
-    th {
-        background-color: #f1eeea
-    }
-
-    
-</style>

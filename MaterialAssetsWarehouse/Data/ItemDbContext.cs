@@ -1,9 +1,10 @@
 ﻿using MaterialAssetsWarehouse.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace MaterialAssetsWarehouse.Data
 {
-    public class ItemDbContext: DbContext
+    public class ItemDbContext : IdentityDbContext<ApplicationUser>
     {
         public ItemDbContext( DbContextOptions<ItemDbContext> options):base(options)
         {

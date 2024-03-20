@@ -1,4 +1,5 @@
 using MaterialAssetsWarehouse.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ItemDbContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("ItemDbContextConnection")));
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<ItemDbContext>();
 builder.Services.AddScoped<IItemRepository, ItemRepository>();  
 
 var app = builder.Build();
@@ -22,7 +25,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
